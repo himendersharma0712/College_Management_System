@@ -45,3 +45,33 @@ export async function fetchStudentDashboard(userId) {
     throw error;
   }
 }
+
+
+// Add these to the bottom of src/api.js
+
+export async function fetchStudents() {
+  const response = await fetch(`${API_BASE_URL}/students/`);
+  if (!response.ok) throw new Error('Failed to fetch students');
+  return await response.json();
+}
+
+export async function createStudent(studentData) {
+  const response = await fetch(`${API_BASE_URL}/students/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(studentData),
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || 'Failed to create student');
+  }
+  return await response.json();
+}
+
+export async function deleteStudent(studentId) {
+  const response = await fetch(`${API_BASE_URL}/students/${studentId}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) throw new Error('Failed to delete student');
+  return await response.json();
+}
