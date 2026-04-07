@@ -1,17 +1,24 @@
-import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import PortalLayout from './components/PortalLayout';
+import StudentDashboard from './pages/StudentDashboard';
+import TeacherDashboard from './pages/TeacherDashboard';
+import AdminDashboard from './pages/AdminDashboard';
 
-function App() {
+export default function App() {
   return (
    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>Login Page Goes Here</div>} />
-        <Route path="/student" element={<div>Student Dashboard</div>} />
-        <Route path="/teacher" element={<div>Teacher Dashboard</div>} />
-        <Route path="/admin" element={<div>Admin Panel</div>} />
+        {/* Public Route */}
+        <Route path="/" element={<Login />} />
+
+        {/* Protected Portal Routes (Wrapped in the shared layout) */}
+        <Route element={<PortalLayout />}>
+          <Route path="/student" element={<StudentDashboard />} />
+          <Route path="/teacher" element={<TeacherDashboard />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
 }
-
-export default App;
