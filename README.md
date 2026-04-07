@@ -69,7 +69,6 @@ Note: The backend is configured to auto-generate all required tables on the firs
 
 ## 2. Backend Setup
 ```
-Bash
 cd backend
 pip install fastapi uvicorn sqlalchemy pymysql pydantic
 uvicorn main:app --reload
@@ -78,7 +77,6 @@ API Documentation (Swagger UI) will be available at http://localhost:8000/docs.
 
 ## 4. Frontend Setup
 ```
-Bash
 # From the project root folder
 npm install
 npm install react-router-dom
