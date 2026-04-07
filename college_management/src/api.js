@@ -75,3 +75,33 @@ export async function deleteStudent(studentId) {
   if (!response.ok) throw new Error('Failed to delete student');
   return await response.json();
 }
+
+
+// Add these to the bottom of src/api.js
+
+export async function fetchTeachers() {
+  const response = await fetch(`${API_BASE_URL}/teachers/`);
+  if (!response.ok) throw new Error('Failed to fetch teachers');
+  return await response.json();
+}
+
+export async function createTeacher(teacherData) {
+  const response = await fetch(`${API_BASE_URL}/teachers/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(teacherData),
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || 'Failed to create teacher');
+  }
+  return await response.json();
+}
+
+export async function deleteTeacher(teacherId) {
+  const response = await fetch(`${API_BASE_URL}/teachers/${teacherId}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) throw new Error('Failed to delete teacher');
+  return await response.json();
+}

@@ -4,6 +4,7 @@ import models
 from database import engine
 from routers import auth
 from routers import students
+from routers import teachers
 
 # Create all tables in the database automatically
 models.Base.metadata.create_all(bind=engine)
@@ -23,6 +24,7 @@ app.add_middleware(
 # Include your separated routes
 app.include_router(auth.router)
 app.include_router(students.router)
+app.include_router(teachers.router)
 
 @app.get("/")
 def root():
